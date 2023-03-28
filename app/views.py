@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 from app.models.user import UserModel
+from app.models.athlete import AthleteModel
 from app.forms import LoginForm
 
 app = Flask(__name__)
@@ -45,9 +46,21 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/exercise')
+@app.route('/athletes')
 @login_required
-def exercise():
+def athletes():
+    athletes = AthleteModel.query.all()
+    return render_template('athletes.html',athletes=athletes)
+
+@app.route('/create')
+@login_required
+def create_athlete():
+    if request.method == 'POST':
+        # print(request.form)
+        print(type(request.form))
+        athlete = AthleteModel(data=request.form.to_dict(flat=False))
+        athlete.save_to_db()
+        return redirect('/athletes')
     return render_template('create.html')
 
 
