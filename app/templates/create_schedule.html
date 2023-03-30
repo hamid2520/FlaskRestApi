@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="nav">
+            <a class="nav-link" href="{{ url_for('index') }}"
+              >صفحه اصلی</a
+            >
+            <a class="nav-link" href="{{ url_for('athletes') }}"
+              >کاربران</a
+            >
+            <a class="nav-link" href="{{ url_for('schedule') }}"
+            >برنامه ها</a
+          >
+          </div>
+        <div>کاربر</div>
+      </div>
+    </header>
+    <section style="padding: 20px 30px">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>افزودن برنامه</h3>
+        <a href="{{ url_for('schedule') }}" class="btn">
+          بازگشت
+        </a>
+      </div>
+      <div>
+        <form method="POST">
+          <div class="container">
+            <hr />
+            <input type='hidden' id= 'exercise_count' name='exercise_count' value='' />
+            <div class="grid-container">
+              <div>
+                <label for="name"><b>عنوان</b></label>
+                <input
+                  type="text"
+                  placeholder="عنوان را وارد کنید"
+                  name="name"
+                  id="name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="duration"><b>مدت زمان</b></label>
+                <input
+                  type="text"
+                  placeholder="مدت زمان را وارد کنید"
+                  name="duration"
+                  id="duration"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="difficulty">میزان سختی</label>
+                <select name="difficulty" id="difficulty">
+                  <option value="1">آسان</option>
+                  <option value="2">متوسط</option>
+                  <option value="3">سخت</option>
+                </select>
+              </div>
+            </div>
+
+            <hr />
+
+            <h4 style="padding-right: 20px">حرکات :</h4>
+            <div id="exercise"></div>
+            <button type="button" onClick="createExercise()">افزودن حرکات</button>
+
+            <hr />
+
+            <button type="submit" class="addbtn">افزودن</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    let counter = 0;
+
+    function createExercise() {
+      const exercise = document.getElementById("exercise");
+
+      counter++;
+      document.getElementById('exercise_count').value =counter;
+
+      exercise.innerHTML += `
+      <div class="grid-container" id="exercise-${counter}">
+        <div>
+            <label for="name"><b>عنوان</b></label>
+            <input
+              type="text"
+              placeholder="عنوان را وارد کنید"
+              name="name[${counter}]"
+              id="name"
+              required
+            />
+          </div>
+          <div>
+              <label for="count_set"><b>ست</b></label>
+              <input
+                type="text"
+                placeholder="ست را وارد کنید"
+                name="count_set[${counter}]"
+                id="count_set"
+                required
+              />
+          </div>
+          <div>
+              <label for="repetitions"><b>تکرار</b></label>
+              <input
+                type="text"
+                placeholder="تکرار را وارد کنید"
+                name="repetitions[${counter}]"
+                id="repetitions"
+                required
+              />
+          </div>
+          <button type="button" onClick="removeExercise('exercise-'+${counter})">delete</button>
+        </div>
+      `;
+    }
+
+    //default create exercise
+    createExercise();
+
+    function removeExercise(elementID) {
+      const element = document.getElementById(elementID);
+
+      const exerciseEL = document.querySelectorAll(`#exercise .grid-container`);
+
+      if (exerciseEL.length <= 1) return;
+
+      element.remove();
+    }
+  </script>
+</html>

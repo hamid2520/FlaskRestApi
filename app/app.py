@@ -12,7 +12,7 @@ from app.resources.progress import Progress, ProgressList
 from app.resources.user import UserRegister, User
 from app.config import postgresqlConfig
 
-from app.views import index, signup, login, logout, athletes, create_athlete
+from app.views import index, signup, login, logout, athletes, create_athlete, schedule, create_schedule
 from app.models.user import UserModel
 
 app = Flask(__name__)
@@ -42,7 +42,9 @@ app.add_url_rule('/login', 'login', view_func=login, methods=['GET', 'POST'])
 app.add_url_rule('/signup', 'signup', view_func=signup, methods=['GET', 'POST'])
 app.add_url_rule('/logout', 'logout', view_func=logout)
 app.add_url_rule('/athletes', 'athletes', view_func=athletes)
+app.add_url_rule('/schedule', 'schedule', view_func=schedule)
 app.add_url_rule('/create_athlete', 'create_athlete', view_func=create_athlete, methods=['GET', 'POST'])
+app.add_url_rule('/create_schedule', 'create_schedule', view_func=create_schedule, methods=['GET', 'POST'])
 
 if __name__ == '__main__':
     # TODO: Add swagger integration

@@ -17,6 +17,9 @@
           <a class="nav-link" href="{{ url_for('athletes') }}"
             >کاربران</a
           >
+          <a class="nav-link" href="{{ url_for('schedule') }}"
+           >برنامه ها</a
+          >
         </div>
         <div>کاربر</div>
       </div>
@@ -32,7 +35,7 @@
         <form method="POST">
           <div class="container">
             <hr />
-
+            <input type='hidden' id= 'progress_count' name='progress_count' value='' />
             <div class="grid-container">
               <div>
                 <label for="name"><b>نام</b></label>
@@ -133,10 +136,75 @@
 
             <hr />
 
+            <h4 style="padding-right: 20px">اطلاعات پیشرفت :</h4>
+            <div id="progress"></div>
+            <button type="button" onClick="createprogress()">افزودن پیشرفت</button>
+
+            <hr />
+
             <button type="submit" class="addbtn">افزودن</button>
           </div>
         </form>
       </div>
     </section>
   </body>
+  <script>
+    let counter = 0;
+
+    function createprogress() {
+      const progress = document.getElementById("progress");
+
+      counter++;
+      document.getElementById('progress_count').value =counter;
+
+      progress.innerHTML += `
+      <div class="grid-container" id="progress-${counter}">
+        <div>
+            <label for="update_date"><b>تاریخ</b></label>
+            <input
+              type="text"
+              placeholder="تاریخ را وارد کنید"
+              name="update_date[${counter}]"
+              id="update_date"
+              required
+            />
+          </div>
+          <div>
+              <label for="weight"><b>وزن</b></label>
+              <input
+                type="text"
+                placeholder="وزن را وارد کنید"
+                name="weight[${counter}]"
+                id="weight"
+                required
+              />
+          </div>
+          <div>
+              <label for="fat_percentage"><b>درصد چربی بدن</b></label>
+              <input
+                type="text"
+                placeholder="درصد چربی بدن را وارد کنید"
+                name="fat_percentage[${counter}]"
+                id="fat_percentage"
+                required
+              />
+          </div>
+          <button type="button" onClick="removeprogress('progress-'+${counter})">delete</button>
+        </div>
+      `;
+    }
+
+    //default create progress
+    createprogress();
+
+    function removeprogress(elementID) {
+      const element = document.getElementById(elementID);
+
+      const progressEL = document.querySelectorAll(`#progress .grid-container`);
+
+      if (progressEL.length <= 1) return;
+
+      element.remove();
+    }
+  </script>
 </html>

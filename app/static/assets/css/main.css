@@ -128,3 +128,13 @@ select {
   text-align: center;
   font-weight: bold;
 }
+
+.login {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    }
+    .m-0 {
+    margin: 0;
+    }
