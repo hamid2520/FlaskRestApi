@@ -8,7 +8,7 @@
 #          'db': 'db'}
 
 postgresql = {'host': 'localhost',
-              'user': 'odoo14',
+              'user': 'user',
               'passwd': '1234',
               'db': 'sport'}
 

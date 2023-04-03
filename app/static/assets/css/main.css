@@ -130,11 +130,26 @@ select {
 }
 
 .login {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    }
-    .m-0 {
-    margin: 0;
-    }
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.m-0 {
+  margin: 0;
+}
+
+.deletebtn {
+  background-color: rgb(250, 55, 55);
+  color: white;
+  padding: 16px 20px;
+  margin: 21px 10px;
+  border: none;
+  cursor: pointer;
+  width: -webkit-fill-available;
+  opacity: 0.9;
+}
+
+.deletebtn:hover {
+  opacity: 1;
+}
