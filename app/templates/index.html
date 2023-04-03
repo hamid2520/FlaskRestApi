@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="nav">
+          <a class="nav-link" href="{{ url_for('index') }}"
+            >صفحه اصلی</a
+          >
+          <a class="nav-link" href="{{ url_for('athletes') }}"
+            >کاربران</a
+          >
+          <a class="nav-link" href="{{ url_for('schedule') }}"
+          >برنامه ها</a
+        >
+        </div>
+        <div>کاربر</div>
+      </div>
+    </header>
+    <section>
+      <div>
+        <h1 class="wellcome">خوش آمدید</h1>
+        <h1 class="wellcome">
+          <span>موضوع پروژه : </span>
+          <span>ردیاب تناسب اندام</span>
+        </h1>
+        <h1 class="wellcome">
+          <span>توسعه دهنده : </span>
+          <span>محمد حسین خان بیوکی</span>
+        </h1>
+        <h1 class="wellcome">
+          <span>استاد : </span>
+          <span>دکتر فلاح</span>
+        </h1>
+        <h1 class="wellcome">
+          <span>نام درس : </span>
+          <span>ذخیره و بازیابی اطلاعات</span>
+        </h1>
+      </div>
+    </section>
+  </body>
+</html>

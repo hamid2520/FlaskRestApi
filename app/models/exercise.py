@@ -10,27 +10,21 @@ class ExerciseModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    duration = db.Column(db.Integer)
     count_set = db.Column(db.Integer)
     repetitions = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship('UserModel', backref='exercises', primaryjoin='ExerciseModel.user_id == UserModel.id')
+    schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
+    schedule = db.relationship('ScheduleModel', backref='exercises', primaryjoin='ExerciseModel.schedule_id == ScheduleModel.id')
 
-    def __init__(self, name, duration, count_set, user_id, repetitions):
+    def __init__(self, name, count_set, schedule_id, repetitions):
         self.name = name
-        self.duration = duration
         self.count_set = count_set
-        self.user_id = user_id
+        self.schedule_id = schedule_id
         self.repetitions = repetitions
 
 
-    def json(self):
-        return {'name': self.name, 'count_set': self.count_set, 'repetitions': self.repetitions,
-                'duration': self.duration, 'user_id': self.user_id}
-
     @classmethod
-    def find_by_name(cls, name, user_id):
-        return cls.query.filter_by(name=name, user_id=user_id).first()
+    def find_by_name(cls, name, schedule_id):
+        return cls.query.filter_by(name=name, schedule_id=schedule_id).first()
 
     def save_to_db(self):
         db.session.add(self)

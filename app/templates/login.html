@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/css/main.css') }}">
+  </head>
+  <body>
+    <section>
+      <div>
+        <h1 class="wellcome">خوش آمدید</h1>
+        <form method="POST">
+          <hr />
+
+          <div class="login">
+            <div>
+              <label for="username"><b>نام کاربری</b></label>
+              <input
+                type="text"
+                placeholder="نام کاربری را وارد کنید"
+                name="username"
+                id="username"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="password"><b>رمز عبور</b></label>
+              <input
+                type="password"
+                placeholder="رمز عبور را وارد کنید"
+                name="password"
+                id="password"
+                required
+              />
+            </div>
+            <hr />
+
+            <button type="submit" class="addbtn m-0">ورود</button>
+          </div>
+        </form>
+        <a href="{{ url_for('signup') }}">حساب کاربری ندارید ؟ ثبت نام کنید</a>
+      </div>
+    </section>
+  </body>
+</html>

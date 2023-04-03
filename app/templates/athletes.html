@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="nav">
+          <a class="nav-link" href="{{ url_for('index') }}"
+            >صفحه اصلی</a
+          >
+          <a class="nav-link" href="{{ url_for('athletes') }}"
+            >کاربران</a
+          >
+          <a class="nav-link" href="{{ url_for('schedule') }}"
+           >برنامه ها</a
+          >
+        </div>
+        <div>کاربر</div>
+      </div>
+    </header>
+    <section style="padding: 20px 30px">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>لیست کاربران</h3>
+        <a href="{{ url_for('create_athlete') }}" class="btn">
+          افزودن کاربر
+        </a>
+      </div>
+      <div>
+        <table id="users">
+          <tr>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>کد ملی</th>
+            <th>موبایل</th>
+            <th>سن</th>
+            <th>نام پدر</th>
+            <th>وزن</th>
+            <th>قد</th>
+          </tr>
+        {% for athlete in athletes %}
+        
+        <tr>
+            <td>{{ athlete['name'] }}</td>
+            <td>{{ athlete['family'] }}</td>
+            <td>{{ athlete['nationalcode'] }}</td> 
+            <td>{{ athlete['phone'] }}</td> 
+            <td>{{ athlete['age'] }}</td>
+            <td>{{ athlete['fathername'] }}</td> 
+            <td>{{ athlete['weight'] }}</td>
+            <td>{{ athlete['height'] }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

@@ -3,31 +3,20 @@
 # standard python imports
 
 from app.db import db
+from flask_login import UserMixin
 from werkzeug.security import hmac
 
 
-class UserModel(db.Model):
+class UserModel(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     password = db.Column(db.String(80))
-    age = db.Column(db.Integer)
-    height = db.Column(db.Integer)
-    weight = db.Column(db.Integer)
-    # pid
-    # phone
-    # gender
-    # date_reg
 
-
-    def __init__(self, username, password, age, height, weight):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.age = age
-        self.height = height
-        self.weight = weight
-
 
     def save_to_db(self):
         db.session.add(self)

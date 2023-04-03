@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="nav">
+          <a class="nav-link" href="{{ url_for('index') }}"
+            >صفحه اصلی</a
+          >
+          <a class="nav-link" href="{{ url_for('athletes') }}"
+            >کاربران</a
+          >
+          <a class="nav-link" href="{{ url_for('schedule') }}"
+           >برنامه ها</a
+          >
+        </div>
+        <div>کاربر</div>
+      </div>
+    </header>
+    <section style="padding: 20px 30px">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>افزودن کاربر</h3>
+        <a href="{{ url_for('athletes') }}" class="btn">
+          بازگشت
+        </a>
+      </div>
+      <div>
+        <form method="POST">
+          <div class="container">
+            <hr />
+            <input type='hidden' id= 'progress_count' name='progress_count' value='' />
+            <div class="grid-container">
+              <div>
+                <label for="name"><b>نام</b></label>
+                <input
+                  type="text"
+                  placeholder="نام را وارد کنید"
+                  name="name"
+                  id="name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="family"><b>نام خانوادگی</b></label>
+                <input
+                  type="text"
+                  placeholder="نام خانوادگی را وارد کنید"
+                  name="family"
+                  id="family"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="nationalcode"><b>کد ملی</b></label>
+                <input
+                  type="text"
+                  placeholder="کد ملی را وارد کنید"
+                  name="nationalcode"
+                  id="nationalcode"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="phone"><b>موبایل</b></label>
+                <input
+                  type="text"
+                  placeholder="موبایل را وارد کنید"
+                  name="phone"
+                  id="phone"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="fathername"><b>نام پدر</b></label>
+                <input
+                  type="text"
+                  placeholder="نام پدر را وارد کنید"
+                  name="fathername"
+                  id="fathername"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="age"><b>سن</b></label>
+                <input
+                  type="text"
+                  placeholder="سن را وارد کنید"
+                  name="age"
+                  id="age"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="gender">جنسیت</label>
+                <select name="gender" id="gender">
+                  <option value="1">مرد</option>
+                  <option value="0">زن</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="weight"><b>وزن</b></label>
+                <input
+                  type="text"
+                  placeholder="وزن را وارد کنید"
+                  name="weight"
+                  id="weight"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="height"><b>قد</b></label>
+                <input
+                  type="text"
+                  placeholder="قد را وارد کنید"
+                  name="height"
+                  id="height"
+                  required
+                />
+              </div>
+            </div>
+
+            <hr />
+
+            <h4 style="padding-right: 20px">اطلاعات پیشرفت :</h4>
+            <div id="progress"></div>
+            <button
+            class="btn"
+            style="margin-right: 20px"
+            type="button"
+            onClick="createprogress()"
+          >
+            افزودن پیشرفت
+          </button>
+
+            <hr />
+
+            <button type="submit" class="addbtn">افزودن</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    let counter = 0;
+
+    function createprogress() {
+      const progress = document.getElementById("progress");
+
+      counter++;
+      document.getElementById('progress_count').value =counter;
+      const div = document.createElement("div");
+
+      div.classList = "grid-container";
+      div.id = `progress-${counter}`;
+
+      div.innerHTML = `
+        <div>
+            <label for="update_date"><b>تاریخ</b></label>
+            <input
+              type="text"
+              placeholder="تاریخ را وارد کنید"
+              name="update_date[${counter}]"
+              id="update_date"
+              required
+            />
+          </div>
+          <div>
+              <label for="weight"><b>وزن</b></label>
+              <input
+                type="text"
+                placeholder="وزن را وارد کنید"
+                name="weight[${counter}]"
+                id="weight"
+                required
+              />
+          </div>
+          <div>
+              <label for="fat_percentage"><b>درصد چربی بدن</b></label>
+              <input
+                type="text"
+                placeholder="درصد چربی بدن را وارد کنید"
+                name="fat_percentage[${counter}]"
+                id="fat_percentage"
+                required
+              />
+          </div>
+          <button class="deletebtn" type="button" onClick="removeExercise('exercise-'+${counter})">حذف</button>
+      `;
+
+      progress.appendChild(div);
+    }
+
+    //default create progress
+    createprogress();
+
+    function removeprogress(elementID) {
+      const element = document.getElementById(elementID);
+
+      const progressEL = document.querySelectorAll(`#progress .grid-container`);
+
+      if (progressEL.length <= 1) return;
+
+      element.remove();
+    }
+  </script>
+</html>
